@@ -45,6 +45,9 @@
 	}
 	#detail-nav-bar{
 		border-bottom: 0.5px solid whitesmoke;
+		position: relative;
+		z-index: 9999;
+		background-color: #fff;
 	}
 	.title-item{
 		flex: 1;

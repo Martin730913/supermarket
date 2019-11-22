@@ -49,7 +49,7 @@
 		methods:{
 			scrollTo(x,y,time=300){
 				//console.log(this.$refs.scroll.BScroll);
-				this.scroll && this.scroll.scrollTo(0,0,500);
+				this.scroll && this.scroll.scrollTo(0,0,time);
 				/* scrollTo方法参数详解
 				 参数一：目标位置的横坐标
 				 参数二：目标位置的纵坐标
