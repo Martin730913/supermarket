@@ -27,7 +27,8 @@
 	import goods from "../../components/content/goods/goods.vue";
 	import BScroll from "../../components/common/BScroll/BScroll.vue";
 	import BackTop from "../../components/content/backTop/backTop.vue";
-	import {debounce} from "../../common/utils.js"
+	import {debounce} from "../../common/utils.js";
+	import {itemImageLoadMixin} from "../../common/mixin.js"
 	
 	//以下是子组件
 	import homeSwiper from "./childComps/homeSwiper";
@@ -62,10 +63,12 @@
 				isShow:false,
 				tabOffsetTop:0,
 				isFixed:false,
-				saveY:0
+				saveY:0,
+				itemImageLoad:null
 				
 			}
 		},
+		mixins:[itemImageLoadMixin],
 		created(){
 			this.getHomeMultidata(),
 			this.getHomeGoods("pop"),
@@ -74,11 +77,6 @@
 			
 		},
 		mounted(){
-			const refresh=debounce(this.$refs.scroll.refresh,1000);
-			this.$bus.$on("itemImageLoad",()=>{
-				refresh();
-			})
-			
 		},
 		computed:{
 			showGoods(){
@@ -91,6 +89,7 @@
 		},
 		deactivated(){
 			this.saveY=this.$refs.scroll.scroll.y;
+			this.$bus.$off("itemImageLoad",this.itemImageLoadMixin)
 		},
 		methods:{
 			/* 

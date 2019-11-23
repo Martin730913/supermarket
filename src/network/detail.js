@@ -19,3 +19,8 @@ export class Goods{
 			this.realPrice=itemInfo.lowNowPrice;
 	}
 }
+export function getRecommend(){
+	return request({
+		url:"/recommend"
+	})
+}
