@@ -1,14 +1,14 @@
 <template>
 	<div class="detail">
-		<detail-nav-bar></detail-nav-bar>
+		<detail-nav-bar @titleClick="titleClick"></detail-nav-bar>
 		<b-scroll class="content" ref="scroll">
 			<detail-swiper :top-images="topImages"></detail-swiper>
 			<detail-base-info :goods="goods"></detail-base-info>
 			<shop-info :shop="shopInfo"></shop-info>
-			<goods-info :detail-info="detailInfo"></goods-info>
-			<params-info :param-info="itemParams"></params-info>
-			<comment-info :comment-info="commentInfo"></comment-info>
-            <goods :goods="recommend"></goods>
+			<goods-info :detail-info="detailInfo" @detailImageLoad="detailImageLoad"></goods-info>
+			<params-info :param-info="itemParams" ref="params"></params-info>
+			<comment-info :comment-info="commentInfo" ref="comment"></comment-info>
+      <goods :goods="recommend" ref="recommend"></goods>
 		</b-scroll>
 	</div>
 </template>
@@ -49,8 +49,9 @@
 				detailInfo:{},
 				itemParams:{},
 				commentInfo:{},
-				recommend:[],
-				itemImageLoad:null
+        recommend:[],
+        themeTops:[],
+        getThemeTops:null
 			}
 		},
 		created() {
@@ -70,11 +71,35 @@
 			});
 			getRecommend().then(res=>{
 				this.recommend=res.data.list;
-			})
-			
-		},
+      });
+      this.$nextTick(()=>{
+        //这里仍然无发获取到值
+        //即使获取到值，在首次进入的情况下值也是不正确的，这是因为首次进入时只渲染了DOM，图片并没有计算在内
+      });
+      //对给ThemeTops赋值的操作进行防抖
+      this.getThemeTops=debounce(()=>{
+        this.themeTops=[];
+        this.themeTops.push(0);
+        this.themeTops.push(this.$refs.params.$el.offsetTop);
+        this.themeTops.push(this.$refs.comment.$el.offsetTop);
+        this.themeTops.push(this.$refs.recommend.$el.offsetTop);
+        console.log(this.themeTops);
+      })
+    },
+    methods: {
+      detailImageLoad(){
+        this.newRefresh();
+        this.getThemeTops();
+      },
+      titleClick(index){
+        this.$refs.scroll.scrollTo(0,-this.themeTops[index],100);
+        //console.log(index);
+      }
+    },
 		mounted() {
-			
+      /* 
+      由于params-info，comment-info，goods三个组件中的数据是异步获取的，并不能保证在mounted里数据就获取到，所以不能在这里给themeTops添加值
+      */
 		},
 		destroyed() {
 			this.$bus.$off("itemImageLoad",this.itemImageLoadMixin);
@@ -87,6 +112,7 @@
 		height: 100vh;
 		background-color: #FFF;
 		position: relative;
+    z-index: 9;
 	}
 	.content{
 		background-color: #FFF;

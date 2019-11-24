@@ -48,8 +48,8 @@
 		},
 		methods:{
 			scrollTo(x,y,time=300){
-				//console.log(this.$refs.scroll.BScroll);
-				this.scroll && this.scroll.scrollTo(0,0,time);
+        //console.log(this.$refs.scroll.BScroll);
+				this.scroll && this.scroll.scrollTo(0,y,time);
 				/* scrollTo方法参数详解
 				 参数一：目标位置的横坐标
 				 参数二：目标位置的纵坐标
@@ -57,7 +57,7 @@
 				 */
 			},
 			refresh(){
-				this.scroll && this.scroll.refresh();
+        this.scroll && this.scroll.refresh();
 			},
 			finishPullUp(){
 				this.scroll && this.scroll.finishPullUp();
