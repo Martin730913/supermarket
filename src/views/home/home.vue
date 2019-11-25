@@ -26,9 +26,8 @@
 	import tabControl from "../../components/content/tabControl";
 	import goods from "../../components/content/goods/goods.vue";
 	import BScroll from "../../components/common/BScroll/BScroll.vue";
-	import BackTop from "../../components/content/backTop/backTop.vue";
 	import {debounce} from "../../common/utils.js";
-	import {itemImageLoadMixin} from "../../common/mixin.js"
+	import {itemImageLoadMixin,backTopMixin} from "../../common/mixin.js"
 	
 	//以下是子组件
 	import homeSwiper from "./childComps/homeSwiper";
@@ -47,8 +46,7 @@
 			feature,
 			tabControl,
 			goods,
-			BScroll,
-			BackTop
+			BScroll
 		},
 		data(){
 			return{
@@ -60,7 +58,6 @@
 					"sell":{page:0,list:[]}
 				},
 				currentType:"pop",
-				isShow:false,
 				tabOffsetTop:0,
 				isFixed:false,
 				saveY:0,
@@ -68,7 +65,7 @@
 				
 			}
 		},
-		mixins:[itemImageLoadMixin],
+		mixins:[itemImageLoadMixin,backTopMixin],
 		created(){
 			this.getHomeMultidata(),
 			this.getHomeGoods("pop"),
@@ -112,9 +109,6 @@
 				}
 				this.$refs.tabControl1.currentIndex=index;
 				this.$refs.tabControl2.currentIndex=index;
-			},
-			backTop(){
-				this.$refs.scroll.scrollTo(0,0,500);
 			},
 			contentScroll(position){
 				//console.log(position);
