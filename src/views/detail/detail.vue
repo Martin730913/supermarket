@@ -2,6 +2,11 @@
   <div class="detail">
     <detail-nav-bar @titleClick="titleClick" ref="nav"></detail-nav-bar>
     <b-scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
+      <ul>
+        <li v-for="item in $store.state.cartList">
+          {{item.iid+","+item.count}}
+        </li>
+      </ul>
       <detail-swiper :top-images="topImages"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <shop-info :shop="shopInfo"></shop-info>
@@ -136,13 +141,12 @@ export default {
     addToCart(){
       const product={
         image:this.topImages[0],
-        title:this.goodsInfo.title,
-        desc:this.goodsInfo.desc,
-        price:this.goodsInfo.realPrice,
+        title:this.goods.title,
+        desc:this.goods.desc,
+        price:this.goods.realPrice,
         iid:this.iid
-      }
-      
-      
+      };
+      this.$store.dispatch("addCart",product);
     }
     
   },
