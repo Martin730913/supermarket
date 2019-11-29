@@ -12,6 +12,7 @@
     </b-scroll>
     <buttom-bar @addCart="addToCart"></buttom-bar>
     <back-top @click.native="backTop" v-show="isShow"></back-top>
+    <!-- <toast :message="message" :show="show"></toast> -->
   </div>
 </template>
 
@@ -29,6 +30,8 @@ import goods from "../../components/content/goods/goods";
 import { debounce } from "../../common/utils.js";
 import { itemImageLoadMixin,backTopMixin } from "../../common/mixin.js";
 import buttomBar from "./childComps/buttomBar";
+import {mapActions} from "vuex";
+//import toast from "../../components/common/toast/toast";
 export default {
   name: "detail",
   components: {
@@ -42,6 +45,7 @@ export default {
     commentInfo,
     goods,
     buttomBar
+    //toast
   },
   mixins: [itemImageLoadMixin,backTopMixin],
   data() {
@@ -56,7 +60,9 @@ export default {
       recommend: [],
       themeTops: [],
       getThemeTops: null,
-      currentIndex: 0
+      currentIndex: 0,
+      // message:"",
+      // show:false
     };
   },
   created() {
@@ -96,6 +102,7 @@ export default {
     });
   },
   methods: {
+    ...mapActions(["addCart"]),
     detailImageLoad() {
       this.newRefresh();
       this.getThemeTops();
@@ -141,7 +148,15 @@ export default {
         price:this.goods.realPrice,
         iid:this.iid
       };
-      this.$store.dispatch("addCart",product);
+      this.addCart(product).then(res=>{
+        // this.show=true;
+        // this.message=res;
+        // setTimeout(() => {
+        //   this.show=false;
+        // }, 1500);
+        this.$toast.show(res,1500);
+      });
+      /* Actions可以返回一个promise */
     }
     
   },

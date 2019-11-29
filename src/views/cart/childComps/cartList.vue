@@ -53,7 +53,7 @@
         <li>分类列表48</li>
         <li>分类列表49</li>
         <li>分类列表50</li>
-      </ul>-->
+      </ul> -->
     </scroll>
   </div>
 </template>
@@ -73,15 +73,14 @@ export default {
   },
   activated() {
     this.$refs.scroll.refresh();
-    console.log("ok");
   }
 };
 </script>
 
 <style scoped>
   .content {
-    height: 677px;
-    /* height: calc(100%-53px); */
+    /* height: 677px; */
+    height: calc(100% - 135px);
     position: absolute;
     overflow: hidden;
     top: 44px;
