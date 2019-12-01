@@ -8,7 +8,7 @@
 	    <div class="shop-middle-item shop-middle-left">
 	      <div class="info-sells">
 	        <div class="sells-count">
-	          {{shop.sells | sellCountFilter}}
+	          {{shop.cSells | sellCountFilter}}
 	        </div>
 	        <div class="sells-text">总销量</div>
 	      </div>
@@ -50,7 +50,7 @@
 			sellCountFilter(value){
 				let result=value;
 				if(value>10000){
-					result=(result/1000).toFixed(1)+"万";
+				  return result=(result/1000).toFixed(1)+"万";
 				}
 				return false;
 			}

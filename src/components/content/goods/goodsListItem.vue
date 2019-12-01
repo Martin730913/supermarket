@@ -55,9 +55,9 @@
   }
 
   .goods-info {
-    font-size: 12px;
+    font-size: 14px;
     position: absolute;
-    bottom: 5px;
+    bottom: 3px;
     left: 0;
     right: 0;
     overflow: hidden;

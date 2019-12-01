@@ -77,7 +77,7 @@
 		},
 		computed:{
 			showGoods(){
-				return this.goods[this.currentType].list
+				return this.goods[this.currentType].list;
 			}
 		},
 		activated() {
@@ -121,7 +121,9 @@
 			},
 			swiperImageLoad(){
 				this.tabOffsetTop=this.$refs.tabControl2.$el.offsetTop;
-			},
+      },
+      
+      
 			/* 
 			 网络请求相关
 			 */
@@ -129,10 +131,11 @@
 				getHomeMultidata().then(res=>{
 					this.banners=res.data.banner.list;
 					this.recommends=res.data.recommend.list;
-				})
+        })
+        
 			},
 			getHomeGoods(type){
-				const page=this.goods[type].page+1;
+        const page=this.goods[type].page+1;
 				getHomeGoods(type,page).then(res=>{
 					this.goods[type].list.push(...res.data.list);
 					this.goods[type].page+=1;

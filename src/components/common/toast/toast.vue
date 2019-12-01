@@ -16,8 +16,6 @@ export default {
   },
   methods: {
     show(message,duration=2000){
-      console.log("ok");
-      
       this.message=message;
       this.isShow=true;
       setTimeout(() => {
