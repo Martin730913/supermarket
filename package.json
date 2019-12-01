@@ -22,6 +22,7 @@
     "ionicons": "^4.5.9-1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "postcss-px-to-viewport": "^1.1.1",
     "vue-template-compiler": "^2.6.10"
   }
 }
