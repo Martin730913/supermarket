@@ -26,7 +26,6 @@
 	import tabControl from "../../components/content/tabControl";
 	import goods from "../../components/content/goods/goods.vue";
 	import BScroll from "../../components/common/BScroll/BScroll.vue";
-	import {debounce} from "../../common/utils.js";
 	import {itemImageLoadMixin,backTopMixin} from "../../common/mixin.js"
 	
 	//以下是子组件

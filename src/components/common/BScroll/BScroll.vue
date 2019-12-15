@@ -29,8 +29,8 @@
 		mounted() {
 			this.scroll=new BScroll(this.$refs.wrapper,{
 				click:true,/* 控制div等元素是否可以点击  */
-				probeType:this.probeType,
-				pullUpLoad:this.pullUpLoad
+				probeType:this.probeType,//是否实时监听位置
+				pullUpLoad:this.pullUpLoad//是否开启上拉加载
 			})
 			if (this.probeType===2||this.probeType===3) {
 				this.scroll.on("scroll",(position)=>{
@@ -59,7 +59,7 @@
 			refresh(){
         this.scroll && this.scroll.refresh();
 			},
-			finishPullUp(){
+			finishPullUp(){//当上拉加载数据加载完毕后，需要调用此方法告诉 better-scroll 数据已加载
 				this.scroll && this.scroll.finishPullUp();
 			}
 		}
