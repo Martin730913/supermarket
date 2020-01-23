@@ -123,3 +123,15 @@ mixins:[itemImageLoadMixin,backTopMixin]mixin.js"
 [事件总线](https://www.jianshu.com/p/4fa3bf211785)
 
 > 事件总线适合于那些没有关系但又需要通信的组件，但很多情况下我们又不想使用复杂的vuex，这时事件总线就比较合适了
+
+### 关于文件打包后路径错误问题
+
+* 在项目根目录下添加vue.config.js文件
+* 在添加的文件中写入以下代码
+
+```javascript
+module.exports = {
+  publicPath: "./"
+}
+//因为vue cli3.3之后废除了baseUrl,所以在这之后使用 publicPath
+```
