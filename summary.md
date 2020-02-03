@@ -135,3 +135,26 @@ module.exports = {
 }
 //因为vue cli3.3之后废除了baseUrl,所以在这之后使用 publicPath
 ```
+
+### 为循环列表添加点击样式
+```html
+<li v-for="(item,index) in category" 
+            :key=index class="list"
+            @click="select(index)"
+            :class="{active:currentIndex===index}">{{item}}</li>
+```
+
+```javascript
+data() {
+    return {
+      category:[],
+      currentIndex:0
+    };
+  }
+....
+methods:{
+    select(index){
+      this.currentIndex=index;
+    }
+  }
+```

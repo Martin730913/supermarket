@@ -84,7 +84,7 @@
 			this.$refs.scroll.refresh();
 		},
 		deactivated(){
-			this.saveY=this.$refs.scroll.scroll.y;
+      this.saveY=this.$refs.scroll.scroll.y;
 			this.$bus.$off("itemImageLoad",this.itemImageLoadMixin)
 		},
 		methods:{
@@ -116,7 +116,7 @@
 				}else{
 					this.isShow=false;
 				}
-				this.isFixed=-position.y>this.tabOffsetTop
+        this.isFixed=-position.y>this.tabOffsetTop;
 			},
 			swiperImageLoad(){
 				this.tabOffsetTop=this.$refs.tabControl2.$el.offsetTop;
@@ -155,7 +155,6 @@
 		color: #fff;
 	}
 	.content{
-		
 		position: absolute;
 		overflow: hidden;
 		top: 44px;

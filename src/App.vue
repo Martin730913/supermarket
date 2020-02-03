@@ -26,13 +26,19 @@
 
 <script>
 	import tabbar from "./components/common/tabbar/tabbar"
-	import tabbarItem from "./components/common/tabbar/tabbar_item"
+  import tabbarItem from "./components/common/tabbar/tabbar_item"
 	export default {
 		name: 'App',
 		components:{
 			tabbar,
-			tabbarItem
-		}
+      tabbarItem
+    },
+    mounted(){
+      this.$bus.$on("hidden",()=>{
+        console.log("ok");
+        
+      })
+    }
 	}
 </script>
 <style>

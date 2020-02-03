@@ -10,7 +10,7 @@
       <comment-info :comment-info="commentInfo" ref="comment"></comment-info>
       <goods :goods="recommend" ref="recommend"></goods>
     </b-scroll>
-    <buttom-bar @addCart="addToCart"></buttom-bar>
+    <buttom-bar @addCart="addToCart" @buy="addToCart"></buttom-bar>
     <back-top @click.native="backTop" v-show="isShow"></back-top>
     <!-- <toast :message="message" :show="show"></toast> -->
   </div>
@@ -28,9 +28,9 @@ import paramsInfo from "./childComps/paramsInfo";
 import commentInfo from "./childComps/commentInfo";
 import goods from "../../components/content/goods/goods";
 import { debounce } from "../../common/utils.js";
-import { itemImageLoadMixin,backTopMixin } from "../../common/mixin.js";
+import { itemImageLoadMixin, backTopMixin } from "../../common/mixin.js";
 import buttomBar from "./childComps/buttomBar";
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 //import toast from "../../components/common/toast/toast";
 export default {
   name: "detail",
@@ -47,7 +47,7 @@ export default {
     buttomBar
     //toast
   },
-  mixins: [itemImageLoadMixin,backTopMixin],
+  mixins: [itemImageLoadMixin, backTopMixin],
   data() {
     return {
       iid: null,
@@ -61,6 +61,7 @@ export default {
       themeTops: [],
       getThemeTops: null,
       currentIndex: 0,
+      cart:null
       // message:"",
       // show:false
     };
@@ -97,7 +98,7 @@ export default {
       this.themeTops.push(this.$refs.params.$el.offsetTop);
       this.themeTops.push(this.$refs.comment.$el.offsetTop);
       this.themeTops.push(this.$refs.recommend.$el.offsetTop);
-      this.themeTops.push(Number.MAX_VALUE);//这个值用于优化contentScroll里的for循环
+      this.themeTops.push(Number.MAX_VALUE); //这个值用于优化contentScroll里的for循环
     });
   },
   methods: {
@@ -127,37 +128,44 @@ export default {
       //对上面for循环的优化
       for (let i = 0, length = this.themeTops.length; i < length - 1; i++) {
         if (
-          this.currentIndex !== i && (positionY >= this.themeTops[i] && positionY < this.themeTops[i + 1])
+          this.currentIndex !== i &&
+          positionY >= this.themeTops[i] && positionY < this.themeTops[i + 1]
         ) {
-          this.currentIndex=i;
-          this.$refs.nav.currentIndex=this.currentIndex;
+          this.currentIndex = i;
+          this.$refs.nav.currentIndex = this.currentIndex;
         }
-      };
-      if(-position.y>1500){
-					this.isShow=true;
-				}else{
-					this.isShow=false;
-				}
+      }
+      if (-position.y > 1500) {
+        this.isShow = true;
+      } else {
+        this.isShow = false;
+      }
     },
-    addToCart(){
-      const product={
-        image:this.topImages[0],
-        title:this.goods.title,
-        desc:this.goods.desc,
-        price:this.goods.realPrice,
-        iid:this.iid
+    addToCart(flag) {
+      const product = {
+        image: this.topImages[0],
+        title: this.goods.title,
+        desc: this.goods.desc,
+        price: this.goods.realPrice,
+        iid: this.iid
       };
-      this.addCart(product).then(res=>{
-        // this.show=true;
-        // this.message=res;
-        // setTimeout(() => {
-        //   this.show=false;
-        // }, 1500);
-        this.$toast.show(res,1500);
-      });
+      this.cart=this.addCart(product);
+      
+      if (flag) {
+        this.$router.push("/cart/");
+      } else {
+        this.cart.then(res => {
+          // this.show=true;
+          // this.message=res;
+          // setTimeout(() => {
+          //   this.show=false;
+          // }, 1500);
+          this.$toast.show(res, 1500);
+        });
+      }
+
       /* Actions可以返回一个promise */
     }
-    
   },
   mounted() {
     /* 
