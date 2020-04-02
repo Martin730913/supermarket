@@ -26,7 +26,7 @@
 	import tabControl from "../../components/content/tabControl";
 	import goods from "../../components/content/goods/goods.vue";
 	import BScroll from "../../components/common/BScroll/BScroll.vue";
-	import {itemImageLoadMixin,backTopMixin} from "../../common/mixin.js"
+	import {itemImageLoadMixin,backTopMixin} from "../../common/minxin"
 	
 	//以下是子组件
 	import homeSwiper from "./childComps/homeSwiper";

@@ -34,7 +34,6 @@
 			})
 			if (this.probeType===2||this.probeType===3) {
 				this.scroll.on("scroll",(position)=>{
-          console.log(position.y);
 					this.$emit("scroll",position)
 				})
 			}

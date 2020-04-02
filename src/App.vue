@@ -32,18 +32,10 @@
 		components:{
 			tabbar,
       tabbarItem
-    },
-    mounted(){
-      this.$bus.$on("hidden",()=>{
-        console.log("ok");
-        
-      })
     }
 	}
 </script>
 <style>
-	/* @import url("../../../assets/css/font-awesome-4.7.0/css/font-awesome.min.css");
-	@import url("../../../assets/css/base.css"); */
 	
 		@import url("./assets/css/font-awesome-4.7.0/css/font-awesome.min.css");
 		@import url("./assets/css/base.css");

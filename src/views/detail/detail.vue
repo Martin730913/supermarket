@@ -28,7 +28,7 @@ import paramsInfo from "./childComps/paramsInfo";
 import commentInfo from "./childComps/commentInfo";
 import goods from "../../components/content/goods/goods";
 import { debounce } from "../../common/utils.js";
-import { itemImageLoadMixin, backTopMixin } from "../../common/mixin.js";
+import { itemImageLoadMixin, backTopMixin } from "../../common/minxin";
 import buttomBar from "./childComps/buttomBar";
 import { mapActions } from "vuex";
 //import toast from "../../components/common/toast/toast";
